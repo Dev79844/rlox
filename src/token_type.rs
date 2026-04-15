@@ -1,3 +1,4 @@
+#[derive(Debug, PartialEq)]
 pub enum TokenType {
     LeftParen, RightParen, LeftBrace, RightBrace,
     Comma, Dot, Minus, Plus, Semicolon, Slash, Star,
@@ -9,7 +10,7 @@ pub enum TokenType {
     Less, LessEqual,
 
     // Literals.
-    Identifier, String, Number,
+    Identifier, StringLit, Number,
 
     // Keywords.
     And, Class, Else, False, Fun, For, If, Nil, Or,
