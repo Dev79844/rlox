@@ -1,3 +1,4 @@
+use std::fmt;
 use crate::token_type::TokenType;
 
 #[derive(Debug, PartialEq)]
@@ -9,6 +10,7 @@ pub struct Token {
 }
 
 #[derive(Debug, PartialEq)]
+#[allow(dead_code)]
 pub enum Literal {
     Nil,
     Bool(bool),
@@ -24,5 +26,18 @@ impl Token {
             line,
             literal
         }
+    }
+}
+
+impl fmt::Display for Token {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let literal = match &self.literal {
+            Some(Literal::String(s)) => s.clone(),
+            Some(Literal::Number(n)) => n.to_string(),
+            Some(Literal::Bool(b))   => b.to_string(),
+            Some(Literal::Nil)       => "nil".to_string(),
+            None                     => "null".to_string(),
+        };
+        write!(f, "{:?} {} {}", self.token_type, self.lexeme, literal)
     }
 }
